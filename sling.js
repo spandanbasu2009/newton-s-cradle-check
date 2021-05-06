@@ -1,12 +1,12 @@
-class Chain{
-    constructor(body1, body2,offsetX,offsetY){
-        this.offsetX = offsetX
-        this.offsetY = offsetY
+class Rope{
+    constructor(body1, body2,point2){
+        
         var options= {
             bodyA:body1,
             bodyB:body2,
-            pointB:{x:this.offsetX,y:this.offsetY}
-        
+            pointB:point2,
+            stiffness:1,
+            length:200
         }
         this.rope = Constraint.create(options);
         World.add(world, this.rope);
@@ -18,13 +18,14 @@ class Chain{
     
     display(){
         var pointA = this.rope.bodyA.position;
-        var pointB = this.rope.bodyB.position;
+        var pointBx = this.rope.bodyB.position.x+this.rope.pointB.x;
+        var pointBy = this.rope.bodyB.position.y+this.rope.pointB.y;
         strokeWeight(2);
         fill("grey");
         var Anchor1X = pointA.x;
         var Anchor1Y = pointA.y;
-        var Anchor2X = pointB.x;
-        var Anchor2Y = pointB.y;
+        var Anchor2X = pointBx;
+        var Anchor2Y = pointBy;
         line(Anchor1X,Anchor1Y,Anchor2X,Anchor2Y);
     }
     
